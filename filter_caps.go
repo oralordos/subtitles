@@ -2,8 +2,6 @@ package subtitles
 
 import (
 	"strings"
-
-	log "github.com/Sirupsen/logrus"
 )
 
 // filterCapitalization converts "ALL CAPS" text into "Initial letter capped"
@@ -13,7 +11,6 @@ func (subtitle *Subtitle) filterCapitalization() *Subtitle {
 
 			clean := ucFirst(line)
 			if clean != cap.Text[i] {
-				log.Println("[caps]", cap.Text[i], "-->", clean)
 				cap.Text[i] = clean
 			}
 		}

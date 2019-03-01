@@ -7,8 +7,7 @@ import (
 	"path"
 	"path/filepath"
 
-	log "github.com/Sirupsen/logrus"
-	"github.com/martinlindhe/subtitles"
+	"github.com/oralordos/subtitles"
 	"gopkg.in/alecthomas/kingpin.v2"
 )
 
@@ -32,10 +31,6 @@ func main() {
 	kingpin.CommandLine.HelpFlag.Short('h')
 	kingpin.Version(version)
 	kingpin.Parse()
-
-	if *verbose {
-		log.SetLevel(log.DebugLevel)
-	}
 
 	inFileName := (*file).Name()
 	outFileName := *outFile

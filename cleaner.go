@@ -3,13 +3,10 @@ package subtitles
 import (
 	"strings"
 	"time"
-
-	log "github.com/Sirupsen/logrus"
 )
 
 // ResyncSubs adjust text timing by `sync` milliseconds
 func (subtitle *Subtitle) ResyncSubs(sync int) {
-	// log.Printf("resyncing with %d\n", sync)
 	for i := range subtitle.Captions {
 		subtitle.Captions[i].Start = subtitle.Captions[i].Start.
 			Add(time.Duration(sync) * time.Millisecond)
@@ -85,14 +82,13 @@ var (
 func (subtitle *Subtitle) RemoveAds() *Subtitle {
 	seq := 1
 	res := []Caption{}
-	for orgSeq, sub := range subtitle.Captions {
+	for _, sub := range subtitle.Captions {
 		isAd := false
 		for _, line := range sub.Text {
 			x := strings.ToLower(line)
 			for _, adLine := range advertisements {
 				if !isAd && strings.Contains(x, adLine) {
 					isAd = true
-					log.Println("[ads]", (orgSeq + 1), sub.Text, "matched", adLine)
 					break
 				}
 			}
